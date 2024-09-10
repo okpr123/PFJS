@@ -1,0 +1,3 @@
+Pierwotnie był to projekt strony stworzony na zaliczenie przedmiotów "Tworzenie responsywnych stron internetowych	" oraz "Nowoczesne trendy w pracy Web Developera". Uzupełniłam projekt o aplikację wykorzystujące framework Vue.js, w celu estetycznego i prostszego zarządzania treścią na stronie.
+Zmieniłam kodowanie galerii, żeby była dynamicznie renderowana przez vue, dodałam dynamiczne wyświetlanie informacji o oferowanych usługach (po kliknięciu rozwija się krótki opis), oraz dodałam kalendarz do rezerwacji wizyt.
+Problemem było dostosowanie skryptu JS tak, żeby wszystkie elementy działały prawidłowo w tym samym czasie.
