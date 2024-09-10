@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Przychodnia Medyczna "Zdrowie"</title>
+    <link rel="stylesheet" href="style.css">
+     <!-- Favicon -->
+     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+     <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header>
+        <img src="images/header.jpg" alt="header" width="1792" height="655">
+        <div class="container">
+            <!-- Hamburger menu ikona -->
+            <div class="menu-icon" id="menu-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#about">O nas</a></li>
+                    <li><a href="#services">Usługi</a></li>
+                    <li><a href="#gallery">Galeria zdjęć</a></li>
+                    <li><a href="#appointment">Umów wizytę</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+            <h1>Przychodnia Medyczna "Zdrowie"</h1>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>O naszej przychodni</h2>
+            <p>Jesteśmy nowoczesną przychodnią medyczną, oferującą szeroki zakres usług zdrowotnych. Nasz zespół składa się z doświadczonych specjalistów, którzy zawsze dbają o zdrowie i dobre samopoczucie naszych pacjentów.</p>
+        </div>
+    </section>
+
+    <div id="app">
+        <!-- Sekcja usług -->
+        <section id="services">
+            <div class="container">
+                <h2>Nasze usługi</h2>
+                <h3>Kliknij na nazwę usługi, aby poznać szczegóły</h3>
+                <ul>
+                    <li v-for="(service, index) in services" @click="toggleServiceDetails(index)">
+                        {{ service.name }}
+                        <p v-if="service.showDetails">{{ service.details }}</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Galeria zdjęć -->
+        <section id="gallery">
+            <div class="container">
+                <h2>Galeria</h2>
+                <div class="gallery-wrapper">
+                    <img :src="images[currentImageIndex]" alt="Zdjęcie przychodni" class="gallery-image">
+                    <div class="gallery-controls">
+                        <button @click="prevImage">Poprzednie</button>
+                        <button @click="nextImage">Następne</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kalendarz umawiania wizyt -->
+        <section id="appointment">
+            <div class="container">
+                <h2>Umów wizytę</h2>
+                <form @submit.prevent="submitAppointment">
+                    <label for="specialist">Wybierz specjalistę:</label>
+                    <select v-model="selectedSpecialist" id="specialist">
+                        <option disabled value="">Wybierz specjalistę</option>
+                        <option v-for="specialist in specialists" :value="specialist">{{ specialist.name }}</option>
+                    </select>
+
+                    <label for="date">Wybierz datę:</label>
+                    <input type="date" v-model="appointmentDate" id="date" required>
+
+                    <label for="time">Wybierz godzinę:</label>
+                    <select v-model="appointmentTime" id="time" required>
+                        <option disabled value="">Wybierz godzinę</option>
+                        <option v-for="time in availableTimes" :value="time">{{ time }}</option>
+                    </select>
+
+                    <button type="submit">Zarezerwuj wizytę</button>
+                </form>
+                
+                <div v-if="appointmentSubmitted">
+                    <h3>Wizyta zarezerwowana!</h3>
+                    <p><strong>Specjalista:</strong> {{ selectedSpecialist.name }}</p>
+                    <p><strong>Data:</strong> {{ appointmentDate }}</p>
+                    <p><strong>Godzina:</strong> {{ appointmentTime }}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <section id="contact">
+        <div class="container contact-container">
+            <!-- Dane kontaktowe -->
+            <div class="contact-info">
+                <h2>Skontaktuj się z nami</h2>
+                <p><strong>Adres:</strong> ul. Zdrowa 123, 00-123 Warszawa</p>
+                <p><strong>Telefon:</strong> +48 123 456 789</p>
+                <p><strong>Email:</strong> kontakt@przychodnia.pl</p>
+                <p><strong>Godziny otwarcia:</strong><br>
+                   Pon - Pt: 8:00 - 18:00<br>
+                   Sobota: 9:00 - 14:00<br>
+                   Niedziela: Zamknięte
+                </p>
+            </div>
+
+            <!-- Formularz kontaktowy -->
+            <div class="contact-form">
+                <h2>Formularz kontaktowy</h2>
+                <form>
+                    <label for="name">Imię i nazwisko:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Wiadomość:</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit">Wyślij</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            Strona stworzona w ramach zaliczeń przedmiotu "Popularne frameworki Java Script"
+    </footer>
+    <script src="skrypty.js"></script> 
+
+</body>
+</html>
+
+
+
+
